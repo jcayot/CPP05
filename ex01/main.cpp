@@ -6,28 +6,17 @@
 
 int	main() {
 	Bureaucrat b1("Idiot", 150), b2("Stupid", 50), b3("Retard", 1), b4;
+	Form f1("Useless", 150, 150), f2("Pointless", 50, 50),
+		f3("Meaningless", 1, 1), f4;
 
-	std::cout << b1 << b2 << b3 << b4;
-
-	try {
-		b1.increaseGrade();
-		b2.increaseGrade();
-		b3.increaseGrade();
-	} catch (std::exception &exception) {
-		std::cout << exception.what() << std::endl;
-	}
-
-	std::cout << b1 << b2 << b3 << b4;
-
-	try {
-		b1.decreaseGrade();
-		b2.decreaseGrade();
-		b3.decreaseGrade();
-		b1.decreaseGrade();
-	} catch (std::exception &exception) {
-		std::cout << exception.what() << std::endl;
-	}
-	std::cout << b1 << b2 << b3 << b4;
-
+	b1.signForm(f2);
+	b2.signForm(f3);
+	b2.signForm(f2);
+	b1.signForm(f1);
+	b4.signForm(f4);
+	b3.decreaseGrade();
+	b3.signForm(f3);
+	b3.increaseGrade();
+	b3.signForm(f3);
 	return (0);
 }

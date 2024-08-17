@@ -9,6 +9,8 @@
 # include <iostream>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form {
 	private:
 		const std::string	name;
@@ -24,10 +26,10 @@ class Form {
 
 		Form&	operator=(const Form& form);
 
-		std::string&	getName() const;
-		bool&			getIsSigned() const;
-		u_int&			getGradeToSign() const;
-		u_int&			getGradeToExec() const;
+		const std::string&		getName() const;
+		const bool&				getIsSigned() const;
+		const u_int&			getGradeToSign() const;
+		const u_int&			getGradeToExec() const;
 
 		void	beSigned(const Bureaucrat& bureaucrat);
 
@@ -38,10 +40,10 @@ class Form {
 
 	class GradeTooLowException : public std::exception {
 		public:
-		const char* what() const noexcept override;
+			const char* what() const noexcept override;
 	};
 };
 
-std::ostream&	operator<<(const std::ostream& os, const Form& form);
+std::ostream&	operator<<(std::ostream& os, const Form& form);
 
 #endif
