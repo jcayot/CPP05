@@ -13,7 +13,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
 	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& source) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& source) : ShrubberyCreationForm(source.target) {
 	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 	*this = source;
 }
@@ -24,13 +24,14 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& shrubberyCreationForm) {
 	if (this != &shrubberyCreationForm) {
-		this->target = shrubberyCreationForm.target;
 		AForm::operator=(shrubberyCreationForm);
 	}
 	return *this;
 }
 
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) {
+	if (!this->getIsSigned())
+		throw FormNotSignedException();
 	if (executor.getGrade() > this->getGradeToExec())
 		throw GradeTooLowException();
 	std::ofstream	outfile(target + "_shrubbery", std::ios::out);

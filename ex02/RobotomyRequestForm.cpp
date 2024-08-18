@@ -13,7 +13,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
 	std::cout << "RobotomyRequestForm constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& robotomyRequestForm) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& robotomyRequestForm) : RobotomyRequestForm(this->target) {
 	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 	*this = robotomyRequestForm;
 }
@@ -24,13 +24,14 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& robotomyRequestForm) {
 	if (this != &robotomyRequestForm) {
-		this->target = robotomyRequestForm.target;
 		AForm::operator=(robotomyRequestForm);
 	}
 	return (*this);
 }
 
 void RobotomyRequestForm::execute(const Bureaucrat& executor) {
+	if (!this->getIsSigned())
+		throw FormNotSignedException();
 	if (executor.getGrade() > this->getGradeToExec())
 		throw GradeTooLowException();
 	std::cout << "some drilling noises" << std::endl;

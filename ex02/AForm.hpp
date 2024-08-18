@@ -43,6 +43,11 @@ class AForm {
 		public:
 			const char* what() const noexcept override;
 	};
+
+	class FormNotSignedException : public std::exception {
+		public:
+			const char* what() const noexcept override;
+	};
 };
 
 std::ostream&	operator<<(std::ostream& os, const AForm& form);

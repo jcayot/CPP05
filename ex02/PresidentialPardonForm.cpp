@@ -13,7 +13,7 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
 	std::cout << "PresidentialPardonForm constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& presidentialPardonForm) {
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& presidentialPardonForm) : PresidentialPardonForm(this->target) {
 	std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
 	*this = presidentialPardonForm;
 }
@@ -24,13 +24,14 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& presidentialPardonForm) {
 	if (this != &presidentialPardonForm) {
-		this->target = presidentialPardonForm.target;
 		AForm::operator=(presidentialPardonForm);
 	}
 	return (*this);
 }
 
 void PresidentialPardonForm::execute(const Bureaucrat& executor) {
+	if (!this->getIsSigned())
+		throw FormNotSignedException();
 	if (executor.getGrade() > this->getGradeToExec())
 		throw GradeTooLowException();
 	std::cout << target << "has been pardoned by Zaphod Beeblebrox." << std::endl;
