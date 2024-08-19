@@ -19,6 +19,11 @@ class Intern {
 		Intern &operator=(const Intern &intern);
 
 		AForm*	makeForm(const std::string& formName, const std::string& formTarget);
+
+	private:
+		AForm*	makePresidentialPardon(const std::string& formTarget);
+		AForm*	makeShrubberyCreation(const std::string& formTarget);
+		AForm*	makeRobotomyRequest(const std::string& formTarget);
 };
 
 #endif
