@@ -44,6 +44,11 @@ class AForm {
 			const char* what() const noexcept override;
 	};
 
+	class AlreadySignedException : public std::exception {
+		public:
+			const char*	what() const noexcept override;
+	};
+
 	class FormNotSignedException : public std::exception {
 		public:
 			const char* what() const noexcept override;

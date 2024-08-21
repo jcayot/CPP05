@@ -18,5 +18,6 @@ int	main() {
 	b3.signForm(f3);
 	b3.increaseGrade();
 	b3.signForm(f3);
+	b3.signForm(f3);
 	return (0);
 }
